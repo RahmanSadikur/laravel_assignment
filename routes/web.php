@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@verify');
+Route::get('/logout', 'logoutController@index');
+
+Route::group(['middleware'=>['sess']], function(){
+    Route::resource('admin', 'AdminController')->only('index');
+    Route::resource('manager', 'ManagerController')->only('index');
+    Route::resources([
+        'user' => 'UsersController',
+        'bus' => 'BusController',
+        'buscounter' => 'BusCounterController',
+        'schedule' => 'ScheduleController'
+
+    ]);
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    
 });
