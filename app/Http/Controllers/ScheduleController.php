@@ -16,6 +16,11 @@ class ScheduleController extends Controller
     {
         //
     }
+    public function showall()
+    {
+        //
+    }
+
 
     /**
      * Show the form for creating a new resource.

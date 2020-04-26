@@ -24,7 +24,7 @@ class LoginController extends Controller
         $data = User::all();
 
        $user = User::where('email', $req->email)
-                    ->where('password', $req->password)
+                    ->where('password',$req->password)
                     ->first();
 
 

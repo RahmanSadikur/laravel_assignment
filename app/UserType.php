@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class user extends Model
+class UserType extends Model
 {
-    protected $table = "users";
+    //
+    protected $table = "userTypes";
     public $timestamps = false;
     
     //const $CREATED_AT = 'create_time';
     //const $UPDATED_AT = 'updated_time';
-    protected $primaryKey = "uid";
+    protected $primaryKey = "userTypeId";
 }
