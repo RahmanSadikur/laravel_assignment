@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\bus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Bus as FacadesBus;
 
 class BusController extends Controller
 {
@@ -15,6 +16,9 @@ class BusController extends Controller
     public function index()
     {
         //
+
+        $busses=Bus::all();
+        return view('admin.showallbus',['busses'=>$busses]);
     }
     public function showall()
     {
@@ -30,6 +34,7 @@ class BusController extends Controller
     public function create()
     {
         //
+        return view('admin.addbus');
     }
 
     /**
@@ -41,6 +46,18 @@ class BusController extends Controller
     public function store(Request $request)
     {
         //
+        $busses= new Bus;
+        $busses->busName=$request->busName;
+        $busses->busNumber=$request->busNumber;
+        if($busses->save())
+        {
+            return redirect()->route('bus.index');
+
+        }
+        else{
+
+            return redirect()->route('bus.create');
+        }
     }
 
     /**
@@ -63,6 +80,8 @@ class BusController extends Controller
     public function edit(bus $bus)
     {
         //
+        $busses=Bus::where('bid',$bus->bid)->first();
+        return view('admin.showbus',["busses"=>$busses]);
     }
 
     /**
@@ -75,6 +94,17 @@ class BusController extends Controller
     public function update(Request $request, bus $bus)
     {
         //
+        $busses=Bus::where('bid',$bus->bid)->first();
+        $busses->busName=$request->busName;
+
+        $busses->busNumber=$request->busNumber;
+        if($busses->save())
+        {
+            return redirect()->route('bus.index');
+        }
+        else{
+            return redirect()->route('bus.edit',["busses"=>$busses]);
+        }
     }
 
     /**
@@ -86,5 +116,12 @@ class BusController extends Controller
     public function destroy(bus $bus)
     {
         //
+        if(Bus::destroy($bus->bid))
+        {
+            return redirect()->route('bus.index');
+        }
+        else{
+            return redirect()->route('bus.index');
+        }
     }
 }

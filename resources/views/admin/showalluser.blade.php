@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Employee List 
+<title>Employee List
 </title>
 </head>
 <body>
@@ -17,14 +17,13 @@
 @for ($i = 0; $i < $users->count(); $i++)
         <tr>
             <td>{{$i}}</td>
-            
+
             <td>{{ $users[$i]->userName }}</td>
             <td>{{ $users[$i]->email}}</td>
             <td>{{ $users[$i]->address }}</td>
             <td>{{ $users[$i]->phone}}</td>
-            
             <td>{{ $users[$i]->dob }}</td>
-            
+
             <td><a href="{{route('user.edit', $users[$i])}}">Edit</a>||
             <form method="post" action="{{action('UserController@delete',$users[$i])}}">
             {{csrf_field()}}
