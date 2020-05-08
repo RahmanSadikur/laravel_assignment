@@ -26,9 +26,9 @@
                             <td>{{$schedules[$i]->busName }}</td>
                             <td>{{ $schedules[$i]->startingCounter }}</td>
                             <td>{{ $schedules[$i]->desCounter }}</td>
-                            <td>{{ $schedules[$i]->starttime }}</td>
+                            <td>{{ $schedules[$i]->startTime }}</td>
                             <td><a href="{{route('schedule.edit', $schedules[$i]->sid)}}"><input type="button"value="Edit"/></a>||
-                                <form action="{{ route('buscounter.destroy',$schedules[$i]->sid) }}" method="POST">
+                                <form action="{{ route('schedule.destroy',$schedules[$i]->sid) }}" method="POST">
                                     <input type="submit"value="delete"/>
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}

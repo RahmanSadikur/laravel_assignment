@@ -24,7 +24,7 @@ class ScheduleController extends Controller
         ->join('busCounters as startbusCounter','startbusCounter.bcid','=','schedules.startCounter')
         ->join('busCounters as desbusCounter','desbusCounter.bcid','=','schedules.destinationCounter')
         ->join('busses','busses.bid','=','schedules.bid')
-        ->select('schedules.*','busses.bid','startbusCounter.counterName as startingCounter','desbusCounter.counterName as desCounter')
+        ->select('schedules.*','busses.busName','startbusCounter.counterName as startingCounter','desbusCounter.counterName as desCounter')
         ->get();
         printf($schedules);
 
@@ -42,8 +42,10 @@ class ScheduleController extends Controller
     {
         //
         $counters=BusCounter::all();
+        $counters2=BusCounter::all();
+
         $busses=Bus::all();
-        return view('admin.addschedule',['busses'=>$busses,'counters'=>$counters]);
+        return view('admin.addschedule',['busses'=>$busses,'counters'=>$counters,'counters2'=>$counters2]);
     }
 
     /**
@@ -92,8 +94,9 @@ class ScheduleController extends Controller
         //
         $schedules=Schedule::where('sid', $id)->first();
         $counters=BusCounter::all();
+        $counters2=BusCounter::all();
         $busses=Bus::all();
-        return view('admin.showschedule',['schedules'=>$schedules,'busses'=>$busses,'counters'=>$counters]);
+        return view('admin.showschedule',['schedules'=>$schedules,'busses'=>$busses,'counters'=>$counters,'counters2'=>$counters2]);
     }
 
     /**

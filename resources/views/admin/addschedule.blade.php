@@ -34,7 +34,7 @@
                     <div class="col-sm-8">
                         <select name="startCounter">
                             @foreach($counters as $counters)
-                            <option value="{{ $counters->bcid }}" >{{ $counters->CounterName }}</option>
+                            <option value="{{ $counters->bcid }}" >{{ $counters->counterName }}</option>
                             @endforeach
 
                         </select>
@@ -46,8 +46,8 @@
                     </div>
                     <div class="col-sm-8">
                         <select name=" destinationCounter">
-                            @foreach($counters as $counters)
-                            <option value="{{ $counters->bcid }}" >{{ $counters->CounterName }}</option>
+                            @foreach($counters2 as $counters2)
+                            <option value="{{ $counters2->bcid }}">{{ $counters2->counterName }}</option>
                             @endforeach
 
                         </select>
@@ -69,6 +69,7 @@
                         <input type="submit" value="Save"/>
                     </div>
                 </div>
+                {{ csrf_field() }}
             </form>
         </div>
     </body>
