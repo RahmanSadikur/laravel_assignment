@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\busCounter;
+use App\user;
+use Facade\FlareClient\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class BusCounterController extends Controller
@@ -15,12 +18,29 @@ class BusCounterController extends Controller
     public function index()
     {
         //
+
+        // $users = DB::table('users')
+        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        //     ->join('orders', 'users.id', '=', 'orders.user_id')
+        //     ->select('users.*', 'contacts.phone', 'orders.price')
+        //     ->get();
+
+
+
+
+
+        $counters=DB::table('busCounters')
+        ->join('users','users.uid','=','busCounters.uid')
+        ->select('busCounters.*','users.userName')
+        ->get();
+        printf($counters[1]->userName);
+        return view('admin.showallbuscounter',["counters"=>$counters]);
     }
     public function showall()
     {
         //
     }
-  
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,6 +50,8 @@ class BusCounterController extends Controller
     public function create()
     {
         //
+      $users=User::all();
+        return view('admin.addbuscounter',['users'=>$users]);
     }
 
     /**
@@ -41,6 +63,20 @@ class BusCounterController extends Controller
     public function store(Request $request)
     {
         //
+        $counters=new BusCounter;
+        $counters->counterName=$request->counterName;
+        $counters->address=$request->address;
+        $counters->city=$request->city;
+
+        $counters->uid=$request->uid;
+        if($counters->save())
+        {
+            return redirect()->route('buscounter.index');
+
+        }
+        else{
+            return redirect()->route('buscounter.create');
+        }
     }
 
     /**
@@ -60,10 +96,15 @@ class BusCounterController extends Controller
      * @param  \App\busCounter  $busCounter
      * @return \Illuminate\Http\Response
      */
-    public function edit(busCounter $busCounter)
+    public function edit($id)
     {
         //
+        $counters=BusCounter::where('bcid', $id)->first();
+        $users=User::all();
+        return View('admin.showbuscounter',['counters'=>$counters,'users'=>$users]);
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -75,6 +116,19 @@ class BusCounterController extends Controller
     public function update(Request $request, busCounter $busCounter)
     {
         //
+        $counters=BusCounter::where('bcid', $request->bcid)->first();
+        $counters->counterName=$request->counterName;
+        $counters->address=$request->address;
+        $counters->city=$request->city;
+        $counters->uid=$request->uid;
+        if($counters->save())
+        {
+            return redirect()->route('buscounter.index');
+        }
+        else{
+            return redirect()->route('buscounter.edit',$busCounter->bcid);
+        }
+
     }
 
     /**
@@ -83,8 +137,11 @@ class BusCounterController extends Controller
      * @param  \App\busCounter  $busCounter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(busCounter $busCounter)
+    public function destroy($id)
     {
         //
+        $counters=BusCounter::where('bcid', $id)->delete();
+        return redirect()->route('buscounter.index');
+
     }
 }
