@@ -19,6 +19,11 @@
                 </div>
                 <div class="col-sm-8">
                     <input type="text" name="counterName" value="{{ $counters->counterName }}"/>
+                    <div>
+                        @error('counterName')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -27,6 +32,11 @@
                 </div>
                 <div class="col-sm-8">
                     <input type="text" name="address" value="{{ $counters->address }}"/>
+                    <div>
+                        @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -35,6 +45,11 @@
                 </div>
                 <div class="col-sm-8">
                     <input type="text" name="city" value="{{ $counters->city }}"/>
+                    <div>
+                        @error('city')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
                 </div>
             </div>
             <div class="row">

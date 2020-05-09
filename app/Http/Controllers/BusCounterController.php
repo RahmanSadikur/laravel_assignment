@@ -63,6 +63,14 @@ class BusCounterController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+
+            'counterName' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+
+        ]);
+
         $counters=new BusCounter;
         $counters->counterName=$request->counterName;
         $counters->address=$request->address;
@@ -116,6 +124,19 @@ class BusCounterController extends Controller
     public function update(Request $request, busCounter $busCounter)
     {
         //
+        $validatedData = $request->validate([
+
+            'counterName' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         $counters=BusCounter::where('bcid', $request->bcid)->first();
         $counters->counterName=$request->counterName;
         $counters->address=$request->address;

@@ -12,6 +12,11 @@
                     </div>
                     <div class="col-sm-8">
                         <input type="date" name="date" value="{{date('Y-m-d')}}"/>
+                        <div>
+                            @error('date')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -25,6 +30,7 @@
                             @endforeach
 
                         </select>
+
                     </div>
                 </div>
                 <div class="row">
@@ -38,6 +44,11 @@
                             @endforeach
 
                         </select>
+                        <div>
+                            @error('startCounter')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -51,6 +62,11 @@
                             @endforeach
 
                         </select>
+                        <div>
+                            @error('destinationCounter')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -59,6 +75,11 @@
                     </div>
                     <div class="col-sm-8">
                         <input type="time" name="startTime" />
+                        <div>
+                            @error('startTime')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">

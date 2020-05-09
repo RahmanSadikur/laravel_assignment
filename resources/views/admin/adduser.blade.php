@@ -23,6 +23,11 @@ Email:
 </td>
 <td>
 <input type='text' name='email' value="{{old('email')}}"/>
+<div>
+    @error('email')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+</div>
 </td>
 </tr>
 
@@ -31,7 +36,12 @@ Email:
 Password:
 </td>
 <td>
-<input type='text' name='password' value="{{old('password')}}"/>
+<input type='password' name='password' value="{{old('password')}}"/>
+<div>
+    @error('password')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+</div>
 </td>
 </tr>
 
@@ -58,7 +68,7 @@ Phone:
 Date Of Birth:
 </td>
 <td>
-<input type='text' name='dob' value="{{old('dob')}}"/>
+<input type='date' name='dob' value="{{old('dob')}}"/>
 </td>
 </tr>
 <tr>
@@ -68,8 +78,8 @@ Designation:
 <td>
 <select name="userTypeId" >
      <option></option>
-        @foreach($userTypes as $userTypes) 
-        <option value="{{ $userTypes->userTypeName}}"> {{ $userTypes->userTypeName }} </option> 
+        @foreach($userTypes as $userTypes)
+        <option value="{{ $userTypes->userTypeName}}"> {{ $userTypes->userTypeName }} </option>
         @endforeach
     </select>
 </td>

@@ -15,7 +15,12 @@
         Bus Name:
     </div>
     <div class="col-sm-8">
-        <input type="text" name="busName"/>
+        <input type="text" name="busName" value="{{ old('busName') }}"/>
+        <div>
+            @error('busName')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        </div>
     </div>
     </div>
     <div class="row">
@@ -23,7 +28,12 @@
             Bus Number:
         </div>
         <div class="col-sm-8">
-            <input type="text" name="busNumber"/>
+            <input type="text" name="busNumber" value="{{ old('busNumber') }}"/>
+            <div>
+                @error('busNumber')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            </div>
         </div>
         </div>
 

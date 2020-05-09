@@ -46,6 +46,18 @@ class BusController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+
+            'busName' => 'required',
+            'busNumber' => 'required|unique:busses',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         $busses= new Bus;
         $busses->busName=$request->busName;
         $busses->busNumber=$request->busNumber;
@@ -94,6 +106,18 @@ class BusController extends Controller
     public function update(Request $request, bus $bus)
     {
         //
+        $validatedData = $request->validate([
+
+            'busName' => 'required',
+            'busNumber' => 'required',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         $busses=Bus::where('bid',$bus->bid)->first();
         $busses->busName=$request->busName;
 

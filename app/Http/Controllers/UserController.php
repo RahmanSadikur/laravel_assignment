@@ -44,6 +44,18 @@ class UserController extends Controller
      */
     public function store(Request $req)
     {
+        $validatedData = $req->validate([
+            'email' => 'required|unique:users|max:255|email',
+            'password' => 'required|min:6',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
+
         $flight = UserType::where('userTypeName', $req->userTypeId)->first();
         //
         $user 			= new User;
@@ -62,7 +74,7 @@ class UserController extends Controller
 		}
     }
 
-   
+
 
     /**
      * Display the specified resource.
@@ -98,6 +110,17 @@ class UserController extends Controller
      */
     public function update(user $u,Request $req )
     {
+        $validatedData = $req->validate([
+
+            'password' => 'required|min:6',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         //
         $user=User::find($u->uid)->first();
 		$user->userName 	= $req->userName;
@@ -118,12 +141,12 @@ class UserController extends Controller
     public function updateuser(Request $req ,$id)
     {
         //
-       
+
         $a=$req->uid;
         $user=User::where('uid', $a)->firstOrFail();
         echo $user;
 		$user->userName 	= $req->userName;
-		
+
 		$user->password 	= $req->password;
 		$user->address 	= $req->address;
         $user->phone= $req->phone;
@@ -150,28 +173,28 @@ class UserController extends Controller
         $res = User::destroy($user->uid);
         if ($res) {
             return redirect()->route('user.index');
-            
-        } 
+
+        }
         else {
             return redirect()->route('user.destroy',$user);
-            
+
         }
     }
     public function delete(user $user)
     {
         //
-        
-        
+
+
         if (User::destroy($user->uid)) {
             return redirect()->route('user.index');
-            
-        } 
+
+        }
         else {
             return redirect()->route('user.destroy',$user);
-            
+
         }
     }
-    
-   
+
+
 
 }

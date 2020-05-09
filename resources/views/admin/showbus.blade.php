@@ -22,7 +22,12 @@
                             Bus Name:
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" value="{{ $busses->busName }}" name="busName"/>
+                            <input type="text" value="{{ $busses->busName }}" name="busName" />
+                            <div>
+                                @error('busName')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            </div>
                         </div>
 
                     </div>
@@ -32,6 +37,11 @@
                         </div>
                         <div class="col-sm-8">
                             <input type="text"  value="{{ $busses->busNumber }}" name="busNumber"/>
+                            <div>
+                                @error('busNumber')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            </div>
                         </div>
 
                     </div>

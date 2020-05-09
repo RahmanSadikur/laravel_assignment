@@ -19,8 +19,14 @@
                         Date:
                     </div>
                     <div class="col-sm-8">
-                        <input type="date" name="date" value="{{$schedules->sid}}"/>
+                        <input type="date" name="date" value="{{$schedules->date}}"/>
+                        <div>
+                            @error('date')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
@@ -33,6 +39,7 @@
                             @endforeach
 
                         </select>
+
                     </div>
                 </div>
                 <div class="row">
@@ -46,6 +53,11 @@
                             @endforeach
 
                         </select>
+                        <div>
+                            @error('startCounter')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -61,6 +73,11 @@
                             @endforeach
 
                         </select>
+                        <div>
+                            @error('destinationCounter')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
 
@@ -70,6 +87,11 @@
                     </div>
                     <div class="col-sm-8">
                         <input type="time" name="startTime" value="{{ $schedules->startTime }}"/>
+                        <div>
+                            @error('startTime')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="row">

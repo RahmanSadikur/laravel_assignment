@@ -57,6 +57,21 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+
+            'date' => 'required',
+
+            'startCounter' => 'required',
+            'destinationCounter' => 'required',
+            'startTime' => 'required',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         $schedules= new Schedule;
         $schedules->date=$request->date;
         $schedules->bid=$request->bid;
@@ -109,6 +124,22 @@ class ScheduleController extends Controller
     public function update(Request $request, schedule $schedule)
     {
         //
+
+        $validatedData = $request->validate([
+
+            'date' => 'required',
+
+            'startCounter' => 'required',
+            'destinationCounter' => 'required',
+            'startTime' => 'required',
+
+        ]);
+        // if($validatedData->fails())
+        // {
+        //     return back()
+		// 			->with('errors', $validatedData->errors())
+		// 			->withInput();
+        // }
         $schedules= Schedule::where('sid', $request->sid)->first();;
         $schedules->date=$request->date;
         $schedules->bid=$request->bid;
