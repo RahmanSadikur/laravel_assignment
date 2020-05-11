@@ -12,14 +12,14 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
- 
+
     public function index(Request $req){
     	return view('login.index');
     }
 
     public function verify(Request $req){
-    	
- 
+
+
 
         $data = User::all();
 
@@ -31,15 +31,18 @@ class LoginController extends Controller
     	if($user != null ){
             $req->session()->put('email', $req->email);
             $req->session()->put('password',$req->password);
-          
+
             if($user->userTypeId==1)
             {
                 return redirect()->route('admin.index');
             }
-            else{
+            else if($user->userTypeId==2){
                 return redirect()->route('manager.index');
             }
-    		
+            else {
+                return redirect()->route('login.index');
+            }
+
 
     	}else{
             $req->session()->flash('msg', 'invalid username/password');
